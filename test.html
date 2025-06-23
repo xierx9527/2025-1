@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>work1</title>
+    <style>
+        table {
+            border-style: solid;
+            border-width: 1px;
+            border-collapse: collapse;
+            width: 75%;
+        }
+
+        th {
+            padding: 20px;
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        button {
+            margin-left: 3%;
+            width: 100px;
+            height: 40px;
+        }
+
+        div {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .bkdark {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1">
+        <caption>
+            运费材料
+        </caption>
+        <thead>
+            <tr>
+                <th scope="col" class="bkdark">区域</th>
+                <th scope="col" class="bkdark">寄达地</th>
+                <th scope="col" class="bkdark">首重(元/1000g)</th>
+                <th scope="col" class="bkdark">续重(元/1000g)</th>
+            </tr>
+            <tr>
+                <th scope="row" rowspan="2" class="bkdark">一区</th>
+                <td>浙江、上海、江苏</td>
+                <td>6</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>江西、安徽</td>
+                <td>7</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <th scope="row" class="bkdark">二区</th>
+                <td>吉林、黑龙江、云南</td>
+                <td>10</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <th scope="row" class="bkdark">三区</th>
+                <td>新疆、西藏</td>
+                <td>15</td>
+                <td>10</td>
+            </tr>
+        </thead>
+    </table>
+</body>
+<form action>
+    <div>
+        <label>头像 <input type="file" name="file" id="file"></label>
+    </div>
+    <div>
+        <label for="name">昵称</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+    <div>
+        <label for="xueli">学历</label>
+        <select id="xueli" name="xueli">
+            <option value="dazhuan">大专</option>
+            <option value="daxue">大学</option>
+        </select>
+    </div>
+    <div>
+        <label for="sex">性别</label>
+        <label><input type="radio" name="radio" value="male">男</label>
+        <label><input type="radio" name="radio" value="famale">女</label>
+    </div>
+    <div>
+        <label for="hobby">爱好</label>
+        <label><input type="checkbox" name="checkbox" value="movie">电影</label>
+        <label><input type="checkbox" name="checkbox" value="sheying">摄影</label>
+        <label><input type="checkbox" name="checkbox" value="music">音乐</label>
+        <label><input type="checkbox" name="checkbox" value="read">阅读</label>
+    </div>
+    <div>
+        <label for="qianming" style="vertical-align: top;">签名</label>
+        <input type="text" name="qianming" id="qianming" style="width: 400px;height: 100px;">
+    </div>
+    <div>
+        <button type="submit"> 保存</button>
+    </div>
+</form>
+
+</html>
