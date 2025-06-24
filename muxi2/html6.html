@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .box {
+            display: flex;
+            width: 80%;
+            height: 150px;
+            padding-bottom: 10px;
+        }
+
+        .box>* {
+            background-color: rgb(96 139 168 / 0.2);
+            width: 100px;
+        }
+
+        .one {
+            flex: 1 1 auto;
+            background-color: red;
+        }
+
+        .two {
+            flex: 0 1 auto;
+            width: 60%;
+            background-color: yellow;
+        }
+
+        .three {
+            flex: 1 1 auto;
+            background-color: blue;
+        }
+
+        .one1 {
+            flex: 0 1 auto;
+            background-color: red;
+            width: 300px;
+        }
+
+        .two1 {
+            flex: 1 1 auto;
+            background-color: yellow;
+        }
+
+        .three1 {
+            flex: 0 1 auto;
+            background-color: blue;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+    </div>
+    <div class="box">
+        <div class="one1"></div>
+        <div class="two1"></div>
+        <div class="three1"></div>
+    </div>
+</body>
+
+</html>
