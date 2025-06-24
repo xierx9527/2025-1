@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        .container {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            top: 100px;
+            margin: auto;
+        }
+
+        .rect {
+            width: 100%;
+            height: 100%;
+            color: rgb(0, 0, 0);
+            background-color: #ccc
+        }
+
+        .sector {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fc0;
+            overflow: hidden;
+        }
+
+        .sector-top-left {
+            top: -0px;
+            left: 0px;
+            border-radius: 0 0 100% 0;
+        }
+
+        .sector-top-right {
+            right: 0px;
+            bottom: -0px;
+            border-radius: 100% 0 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="rect"></div>
+        <div class="sector sector-top-left"></div>
+        <div class="sector sector-top-right"></div>
+    </div>
+</body>
+
+</html>
