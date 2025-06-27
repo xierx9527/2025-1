@@ -1,0 +1,124 @@
+basePath: /
+definitions:
+  main.Book:
+    description: 图书信息
+    properties:
+      author:
+        type: string
+      id:
+        type: string
+      stock:
+        description: 修改为int类型更合理
+        type: integer
+      title:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@example.com
+    name: API支持
+  description: 这是一个简单的图书管理系统API
+  title: 图书管理API
+  version: "1.0"
+paths:
+  /books:
+    get:
+      description: |-
+        获取所有图书
+        获取所有图书信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图书列表
+          schema:
+            items:
+              $ref: '#/definitions/main.Book'
+            type: array
+      tags:
+      - 图书管理
+    post:
+      consumes:
+      - application/json
+      description: |-
+        添加新书
+        添加一本新书到图书库
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 成功添加图书
+          schema:
+            $ref: '#/definitions/main.Book'
+        "400":
+          description: 请求参数错误
+          schema:
+            type: object
+        "409":
+          description: 图书ID已存在
+          schema:
+            type: object
+      tags:
+      - 图书管理
+  /books/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: |-
+        删除图书
+        根据id删除图书
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功删除图书
+          schema:
+            $ref: '#/definitions/main.Book'
+        "404":
+          description: 未找到对应图书
+          schema:
+            type: object
+      tags:
+      - 图书管理
+    get:
+      description: |-
+        获取
+        根据ID获取图书
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 成功获取图书
+          schema:
+            $ref: '#/definitions/main.Book'
+        "404":
+          description: 为找到对应图书
+          schema:
+            type: object
+      tags:
+      - 图书管理
+    put:
+      consumes:
+      - application/json
+      description: |-
+        更新图书
+        根据ID更新对应图书
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功更新图书
+          schema:
+            $ref: '#/definitions/main.Book'
+        "400":
+          description: 请求参数错误
+          schema:
+            type: object
+        "404":
+          description: 未找到对应图书
+          schema:
+            type: object
+      tags:
+      - 图书管理
+swagger: "2.0"
