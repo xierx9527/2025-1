@@ -20,6 +20,7 @@ type Profile struct {
 	Password string `json:"password"`
 }
 
+// 生成token
 func GenerateToken(username string, password string) (string, error) {
 	claims := Claims{
 		username,
@@ -31,6 +32,7 @@ func GenerateToken(username string, password string) (string, error) {
 	return token.SignedString([]byte(Secret))
 }
 
+// 处理登录请求
 func AuthLoginHandler(c *gin.Context) {
 	var user Profile
 	err := c.ShouldBindJSON(&user)
@@ -64,6 +66,7 @@ func AuthLoginHandler(c *gin.Context) {
 	})
 }
 
+// 验证解析token
 func ParseToken(tokenString string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (i interface{}, err error) {
 		return []byte(Secret), nil // 转换为字节切片
@@ -77,6 +80,7 @@ func ParseToken(tokenString string) (*Claims, error) {
 	return nil, errors.New("invalid token")
 }
 
+// 认证中间件
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.Request.Header.Get("Authorization")
