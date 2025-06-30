@@ -1,0 +1,201 @@
+CREATE DATABASE train_sql;
+
+USE train_sql;
+
+CREATE TABLE book(
+book_id VARCHAR(36) PRIMARY KEY, 
+Title VARCHAR(40) NOT NULL, 
+Author VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE storage(
+book_id VARCHAR(36) PRIMARY KEY, 
+Stock INT NOT NULL, 
+FOREIGN KEY(book_id) REFERENCES book(book_id)
+);
+
+CREATE TABLE person(
+person_id INT AUTO_INCREMENT PRIMARY KEY, 
+Name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE read_preference(
+id INT AUTO_INCREMENT PRIMARY KEY, 
+person_id INT NOT NULL, 
+book_id VARCHAR(36) NOT NULL, 
+FOREIGN KEY (person_id) REFERENCES person(person_id), 
+FOREIGN KEY (book_id) REFERENCES book(book_id), 
+UNIQUE KEY (person_id, book_id)
+)
+
+INSERT
+	INTO
+	book (
+		book_id,
+		Title,
+		Author
+	)
+VALUES
+(
+	'go-away',
+	'the way to go',
+	'Ivo'
+),
+(
+	'go-lang',
+	'Go语言圣经',
+	'Alan, Brian'
+),
+(
+	'go-web',
+	'Go Web编程',
+	'Anonymous'
+),
+(
+	'con-cur',
+	'Concurrency in Go',
+	'Katherine'
+);
+
+INSERT
+	INTO
+	storage (
+		book_id,
+		stock
+	)
+VALUES
+(
+	'go-away',
+	20
+),
+(
+	'go-lang',
+	17
+),
+(
+	'go-web',
+	4
+),
+(
+	'con-cur',
+	9
+);
+
+INSERT
+	INTO
+	person (name)
+VALUES
+('小明'),
+('张三'),
+('翟曙');
+
+INSERT
+	INTO
+	read_preference (
+		person_id,
+		book_id
+	)
+VALUES
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '小明'
+	),
+	'go-away'
+),
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '小明'
+	),
+	'go-web'
+),
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '小明'
+	),
+	'con-cur'
+),
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '张三'
+	),
+	'go-away'
+),
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '翟曙'
+	),
+	'go-web'
+),
+(
+	(
+		SELECT
+			person_id
+		FROM
+			person
+		WHERE
+			name = '翟曙'
+	),
+	'con-cur'
+);
+
+SELECT#查询喜欢阅读第三本书的人
+	p.name
+FROM
+	person p
+JOIN read_preference rp ON
+	p.person_id = rp.person_id
+JOIN book b ON
+	rp.book_id = b.book_id
+WHERE
+	b.book_id = 'go-web';
+
+SELECT#查询没有被喜欢阅读的书的信息(id,作者,标题,库存)
+	b.book_id,
+	b.author,
+	b.title,
+	i.stock
+FROM
+	book b
+JOIN storage i ON
+	b.book_id = i.book_id
+LEFT JOIN read_preference rp ON
+	b.book_id = rp.book_id
+WHERE
+	rp.id IS NULL;
+
+SELECT#查询哪些⼈喜欢哪本书,列出⼈名和书名
+	p.name AS person_name,
+	b.title AS book_title
+FROM
+	person p
+JOIN read_preference rp on p.person_id = rp.person_id
+JOIN book b ON
+	rp.book_id = b.book_id
+ORDER BY
+	p.name,
+	b.title;
