@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>组件测试</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 在这里粘贴你的所有组件代码
+        function Profile() {
+            return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
+        }
+
+        function Gallery() {
+            return (
+                <section>
+                    <h1>了不起的科学家们</h1>
+                    <Profile />
+                    <Profile />
+                    <Profile />
+                </section>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Profile />
+                    <Gallery />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
