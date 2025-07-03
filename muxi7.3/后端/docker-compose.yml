@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - MYSQL_DSN=root:20041017@tcp(mysql:3306)/Book_Management?charset=utf8mb4&parseTime=True&loc=Local
+    depends_on:
+      - mysql
+    networks:
+      - book-network
+    restart: on-failure
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 20041017
+      MYSQL_DATABASE: Book_Management
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - book-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+volumes:
+  mysql-data:
+
+
+networks:
+  book-network:
+    driver: bridge
